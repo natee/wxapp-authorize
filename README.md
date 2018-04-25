@@ -5,6 +5,10 @@
 mpvue开发，src目录下有main.js，同级新建wx-oauth目录。（这都不重要）
 
 ```
+├── pages
+│   ├── home
+│   │   ├── home.vue
+│   │   └── main.js
 ├── main.js
 └── wx-oauth
     ├── config
@@ -12,9 +16,18 @@ mpvue开发，src目录下有main.js，同级新建wx-oauth目录。（这都不
     └── authorize.js
 ```
 
-main.js中，你也可以写在其它需要授权的页面
+如在home页授权
 
 ```javascript
-import {mpAuthorize} from './wx-oauth/authorize'
-mpAuthorize()
+import Authorize from '@/wx-oauth/oauth'
+
+export default {
+  mounted(){
+    const wxAuth = new Authorize()
+    wxAuth.authroize(this.init)
+  },
+  methods: {
+    init(){}
+  }
+}
 ```
