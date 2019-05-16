@@ -22,23 +22,14 @@ export default {
     }
   },
   mounted(){
-    const self = this
-    const wxAuth = new Authorize()
-    wxAuth.authroize({
-      success: self.init,
-      fail: function(){
-        self.needAuthorize = true
-      }
-    })
+    this.authorize();
   },
   methods: {
     closeAuthorizeModal(){
       this.needAuthorize = false
     },
-    authorize(callback){
+    authorize(){
       const self = this
-      self.needAuthorize = false
-
       const wxAuth = new Authorize()
       wxAuth.authroize({
         success: self.init,
@@ -49,10 +40,11 @@ export default {
     },
 
     // 授权成功后，初始化
-    init(){
-
+    init(code, data){
+      this.closeAuthorizeModal();
+      console.log('wx.login return code:', code);
+      console.log('getUserInfo:', data);
     }
-
   }
 }
 </script>

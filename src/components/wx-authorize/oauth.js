@@ -20,10 +20,11 @@ class Authorize {
     const self = this
 
     // TODO api更新，这个不能用了，用自定义提示，点击按钮才能调用
+    // 但是这里是通过点击授权按钮事件过来的，所以可以直接调用
     wx.getUserInfo({
       success: (data) => {
         if(self.successCb && typeof self.successCb === "function"){
-          self.successCb()
+          self.successCb(this.code, data)
         }
       },
       fail: (res) => {
